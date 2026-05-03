@@ -31,3 +31,32 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# =========================
+# 🔐 Security / Secrets
+# =========================
+.env
+application-local.properties
+application-secret.properties
+
+# Optional: if you ever split configs
+application-dev.properties
+application-prod.properties
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Build artifacts (extra safety)
+# =========================
+*.jar
+*.war
+*.class
