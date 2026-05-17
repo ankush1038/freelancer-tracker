@@ -56,6 +56,19 @@ public class GlobalExceptionHandler {
         );
     }
 
+    // Handle Forbidden Access
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ResponseDTO> handleForbiddenExceptions(ForbiddenException ex){
+
+        ResponseDTO response = new ResponseDTO(
+                ex.getMessage(),
+                null
+        );
+
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
+
+
     // Handle generic exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseDTO> handleGenericExceptions(Exception ex){

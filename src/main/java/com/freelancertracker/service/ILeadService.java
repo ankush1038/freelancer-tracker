@@ -10,7 +10,7 @@ public interface ILeadService {
 
     List<LeadDTO> getLeads(String userEmail);
 
-    LeadDTO updateLeadStatus(Long id, String status);
+    LeadDTO updateLeadStatus(Long id, String status, String userEmail);
 
     void deleteLead(Long id);
 }

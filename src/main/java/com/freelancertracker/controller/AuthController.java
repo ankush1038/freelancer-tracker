@@ -3,14 +3,14 @@ package com.freelancertracker.controller;
 import com.freelancertracker.dto.LoginDTO;
 import com.freelancertracker.dto.ResponseDTO;
 import com.freelancertracker.dto.UserDTO;
+import com.freelancertracker.dto.UserResponseDTO;
 import com.freelancertracker.service.IAuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -36,5 +36,12 @@ public class AuthController {
 
         return new ResponseDTO("Login Successful",token);
 
+    }
+
+    // Get all users
+    @GetMapping
+    public List<UserResponseDTO> getAllUsers(){
+
+        return authService.getAllUsers();
     }
 }

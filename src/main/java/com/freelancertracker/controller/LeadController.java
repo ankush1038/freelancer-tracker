@@ -20,6 +20,7 @@ public class LeadController {
     public LeadDTO createLead(@RequestBody LeadDTO leadDTO, Authentication authentication){
         String userEmail = authentication.getName();
 
+        System.out.println(authentication.getName());
         return leadService.createLead(leadDTO, userEmail);
     }
 
@@ -28,14 +29,17 @@ public class LeadController {
 
         String userEmail = authentication.getName();
 
+        System.out.println(authentication.getName());
+
         return leadService.getLeads(userEmail);
     }
 
     @PutMapping("/{id}")
-    public LeadDTO updateLeadStatus(@PathVariable Long id, @RequestParam String status){
+    public LeadDTO updateLeadStatus(@PathVariable Long id, @RequestParam String status, Authentication authentication){
 
-        return leadService.updateLeadStatus(id, status);
+        String userEmail = authentication.getName();
 
+        return leadService.updateLeadStatus(id, status, userEmail);
     }
 
     @DeleteMapping("{id}")

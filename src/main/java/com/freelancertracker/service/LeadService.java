@@ -1,6 +1,8 @@
 package com.freelancertracker.service;
 
 import com.freelancertracker.dto.LeadDTO;
+import com.freelancertracker.exception.ForbiddenException;
+import com.freelancertracker.exception.ResourceNotFoundException;
 import com.freelancertracker.model.Lead;
 import com.freelancertracker.model.Status;
 import com.freelancertracker.model.User;
@@ -55,10 +57,18 @@ public class LeadService implements ILeadService {
     }
 
     @Override
-    public LeadDTO updateLeadStatus(Long id, String status) {
+    public LeadDTO updateLeadStatus(Long id, String status, String userEmail) {
+
+        User currentUser = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("User not Found!"));
 
         Lead lead = leadRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Lead not found!"));
+                .orElseThrow(()-> new ResourceNotFoundException("Lead not found!"));
+
+        if(!lead.getUser().getId().equals(currentUser.getId())){
+
+            throw new ForbiddenException("You ar not allowed to update this lead!");
+        }
 
         lead.setStatus(Status.valueOf(status.toUpperCase()));
 
